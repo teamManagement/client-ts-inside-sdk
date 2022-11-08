@@ -19,7 +19,7 @@ const _electronSdk = _teamworkInsideSdk.electron;
 /**
  * electron相关api
  */
-export const electron: ElectronAPI = {
+export const electron: ElectronAPI & { isDev: boolean } = {
   /**
    * ipcRender对象
    */
@@ -32,6 +32,10 @@ export const electron: ElectronAPI = {
    * process 对象
    */
   process: _electronSdk.process,
+  /**
+   * 是否为开发模式
+   */
+  isDev: _electronSdk.isDev,
 };
 
 const _idSdk = _teamworkInsideSdk.id;
@@ -245,6 +249,12 @@ export const currentWindow = {
   close(): Promise<void> {
     return _currentWindowSdk.close();
   },
+  /**
+   * 打开窗体中BrowserView的开发者工具
+   */
+  openBrowserViewDevTools(): Promise<void> {
+    return _currentWindowSdk.openBrowserViewDevTools();
+  },
 };
 
 const _applicationsSdk = _teamworkInsideSdk.applications;
@@ -334,11 +344,33 @@ export const applications = {
   destroyAlertById(id: string): Promise<void> {
     return _applicationsSdk.destroyAlertById(id);
   },
+  /**
+   * 安装应用信息
+   * @param appId 要安装的应用ID
+   */
   install(appId: string): Promise<void> {
     return _applicationsSdk.install(appId);
   },
+  /**
+   * 安装应用调试信息
+   * @param appInfo 应用信息
+   */
+  installWithDebug(appInfo: AppInfo): Promise<void> {
+    return _applicationsSdk.installWithDebug();
+  },
+  /**
+   * 根据应用ID卸载应用
+   * @param appId 应用ID
+   */
   uninstall(appId: string): Promise<void> {
     return _applicationsSdk.uninstall(appId);
+  },
+  /**
+   * 卸载调试应用
+   * @param appId 要卸载的调试应用ID
+   */
+  uninstallWithDebug(appId: string): Promise<void> {
+    return _applicationsSdk.uninstallWithDebug(appId);
   },
   /**
    * 获取已经打开的应用列表

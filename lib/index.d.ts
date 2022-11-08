@@ -5,7 +5,9 @@ export * as teamworkSDK from "@byzk/teamwork-sdk";
 /**
  * electron相关api
  */
-export declare const electron: ElectronAPI;
+export declare const electron: ElectronAPI & {
+    isDev: boolean;
+};
 /**
  * id相关api
  */
@@ -173,6 +175,10 @@ export declare const currentWindow: {
      * 关闭
      */
     close(): Promise<void>;
+    /**
+     * 打开窗体中BrowserView的开发者工具
+     */
+    openBrowserViewDevTools(): Promise<void>;
 };
 /**
  * 应用相关API
@@ -232,8 +238,26 @@ export declare const applications: {
      * @param id 应用ID
      */
     destroyAlertById(id: string): Promise<void>;
+    /**
+     * 安装应用信息
+     * @param appId 要安装的应用ID
+     */
     install(appId: string): Promise<void>;
+    /**
+     * 安装应用调试信息
+     * @param appInfo 应用信息
+     */
+    installWithDebug(appInfo: AppInfo): Promise<void>;
+    /**
+     * 根据应用ID卸载应用
+     * @param appId 应用ID
+     */
     uninstall(appId: string): Promise<void>;
+    /**
+     * 卸载调试应用
+     * @param appId 要卸载的调试应用ID
+     */
+    uninstallWithDebug(appId: string): Promise<void>;
     /**
      * 获取已经打开的应用列表
      * @returns 打开的应用列表
