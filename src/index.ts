@@ -1,6 +1,14 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
 import { AppInfo, ContextMenu, MenuItem } from "@byzk/teamwork-sdk";
 
+export {
+  AppInfo,
+  AppType,
+  IconType,
+  ContextMenu,
+  MenuItem,
+} from "@byzk/teamwork-sdk";
+
 const _windows = window as any;
 const _teamworkInsideSdk = _windows.teamworkInsideSdk;
 

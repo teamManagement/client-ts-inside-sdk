@@ -1,5 +1,6 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
 import { AppInfo, ContextMenu, MenuItem } from "@byzk/teamwork-sdk";
+export { AppInfo, AppType, IconType, ContextMenu, MenuItem, } from "@byzk/teamwork-sdk";
 export * as teamworkSDK from "@byzk/teamwork-sdk";
 /**
  * electron相关api
