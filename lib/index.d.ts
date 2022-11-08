@@ -1,9 +1,13 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
+import { AppInfo, ContextMenu, MenuItem } from "@byzk/teamwork-sdk";
+export { AppInfo, AppType, IconType, ContextMenu, MenuItem, } from "@byzk/teamwork-sdk";
 export * as teamworkSDK from "@byzk/teamwork-sdk";
 /**
  * electron相关api
  */
-export declare const electron: ElectronAPI;
+export declare const electron: ElectronAPI & {
+    isDev: boolean;
+};
 /**
  * id相关api
  */
@@ -171,86 +175,11 @@ export declare const currentWindow: {
      * 关闭
      */
     close(): Promise<void>;
+    /**
+     * 打开窗体中BrowserView的开发者工具
+     */
+    openBrowserViewDevTools(): Promise<void>;
 };
-/**
- * 应用类别
- */
-export declare enum AppType {
-    /**
-     * 远程WEB
-     */
-    REMOTE_WEB = 0,
-    /**
-     * 本地WEB
-     */
-    LOCAL = 1
-}
-/**
- * 图标类型
- */
-export declare enum IconType {
-    /**
-     * URL路径
-     */
-    URL = 0,
-    /**
-     * iconfont
-     */
-    ICON_FONT = 1
-}
-/**
- * 应用信息
- */
-export interface AppInfo {
-    /**
-     * 应用ID
-     */
-    id: string;
-    /**
-     * 应用名称
-     */
-    name: string;
-    /**
-     * 是否为内部API应用
-     */
-    inside: boolean;
-    /**
-     * 应用类别
-     */
-    type: AppType;
-    /**
-     * 远程地址
-     */
-    remoteSiteUrl: string;
-    /**
-     * 要访问的URL
-     */
-    url: string;
-    /**
-     * 图标信息
-     */
-    icon: string;
-    /**
-     * 图标类型
-     */
-    iconType: IconType;
-    /**
-     * 长描述
-     */
-    desc: string;
-    /**
-     * 短描述
-     */
-    shortDesc: string;
-    /**
-     * 版本
-     */
-    version: string;
-    /**
-     * 是否正在加载中
-     */
-    loading?: boolean;
-}
 /**
  * 应用相关API
  */
@@ -309,8 +238,26 @@ export declare const applications: {
      * @param id 应用ID
      */
     destroyAlertById(id: string): Promise<void>;
+    /**
+     * 安装应用信息
+     * @param appId 要安装的应用ID
+     */
     install(appId: string): Promise<void>;
+    /**
+     * 安装应用调试信息
+     * @param appInfo 应用信息
+     */
+    installWithDebug(appInfo: AppInfo): Promise<void>;
+    /**
+     * 根据应用ID卸载应用
+     * @param appId 应用ID
+     */
     uninstall(appId: string): Promise<void>;
+    /**
+     * 卸载调试应用
+     * @param appId 要卸载的调试应用ID
+     */
+    uninstallWithDebug(appId: string): Promise<void>;
     /**
      * 获取已经打开的应用列表
      * @returns 打开的应用列表
@@ -322,69 +269,6 @@ export declare const applications: {
     getCurrentAppInfo(): AppInfo | undefined;
 };
 /**
- * 菜单项
- */
-export interface MenuItem {
-    /**
-     * 单击事件
-     */
-    click?: () => void;
-    /**
-     * 菜单类型
-     */
-    type?: "normal" | "separator" | "submenu";
-    /**
-     * 标题
-     */
-    label?: string;
-    /**
-     * 子标题
-     */
-    sublabel?: string;
-    /**
-     * 提示
-     */
-    toolTip?: string;
-    /**
-     * 图标
-     */
-    icon?: string;
-    /**
-     * 是否启用
-     */
-    enabled?: boolean;
-    /**
-     * 是否可见
-     */
-    visible?: boolean;
-    /**
-     * 子菜单项
-     */
-    submenu?: MenuItem[];
-}
-/**
- * 菜单接口
- */
-export interface Menu {
-    /**
-     * 菜单里的菜单项
-     */
-    items(): MenuItem[] | undefined;
-    /**
-     * 在窗体中展示
-     */
-    popup(): Promise<void>;
-    /**
-     * 主动出发菜单项的单机事件
-     * @param itemId 菜单项id
-     */
-    click(itemId: string): void;
-    /**
-     * 菜单ID
-     */
-    id(): string;
-}
-/**
  * 上下文相关api
  */
 export declare const contextmenu: {
@@ -394,7 +278,7 @@ export declare const contextmenu: {
      * @param menuId 菜单ID
      * @returns 菜单接口
      */
-    build(menuItemList: MenuItem[], menuId?: string): Menu;
+    build(menuItemList: MenuItem[], menuId?: string): ContextMenu;
     /**
      * 清除菜单对象根据菜单ID
      * @param menuId 菜单ID
