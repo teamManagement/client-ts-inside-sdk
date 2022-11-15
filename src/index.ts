@@ -356,7 +356,7 @@ export const applications = {
    * @param appInfo 应用信息
    */
   installWithDebug(appInfo: AppInfo): Promise<void> {
-    return _applicationsSdk.installWithDebug();
+    return _applicationsSdk.installWithDebug(appInfo);
   },
   /**
    * 根据应用ID卸载应用
