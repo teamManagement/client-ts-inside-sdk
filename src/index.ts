@@ -1,5 +1,11 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
-import { AppInfo, ContextMenu, MenuItem, UserInfo } from "@byzk/teamwork-sdk";
+import {
+  AppInfo,
+  ContextMenu,
+  DbInterface,
+  MenuItem,
+  UserInfo,
+} from "@byzk/teamwork-sdk";
 
 export {
   AppInfo,
@@ -489,3 +495,5 @@ export const remoteCache = {
     return _remoteCache.userList(filterOptions);
   },
 };
+
+export const insideDb = _teamworkInsideSdk.insideDb as DbInterface;
