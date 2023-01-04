@@ -4,6 +4,7 @@ import {
   ContextMenu,
   DbInterface,
   MenuItem,
+  OrgInfo,
   UserInfo,
 } from "@byzk/teamwork-sdk";
 
@@ -13,6 +14,7 @@ export {
   IconType,
   ContextMenu,
   MenuItem,
+  OrgInfo,
 } from "@byzk/teamwork-sdk";
 
 const _windows = window as any;
@@ -493,6 +495,13 @@ export const remoteCache = {
     filterOptions?: RemoteCacheUserListFilterOption
   ): Promise<UserInfo[]> {
     return _remoteCache.userList(filterOptions);
+  },
+  /**
+   * 获取机构列表
+   * @returns 机构列表
+   */
+  orgList(): Promise<OrgInfo[]> {
+    return _remoteCache.orgList();
   },
 };
 

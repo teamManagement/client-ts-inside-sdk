@@ -1,6 +1,6 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
-import { AppInfo, ContextMenu, DbInterface, MenuItem, UserInfo } from "@byzk/teamwork-sdk";
-export { AppInfo, AppType, IconType, ContextMenu, MenuItem, } from "@byzk/teamwork-sdk";
+import { AppInfo, ContextMenu, DbInterface, MenuItem, OrgInfo, UserInfo } from "@byzk/teamwork-sdk";
+export { AppInfo, AppType, IconType, ContextMenu, MenuItem, OrgInfo, } from "@byzk/teamwork-sdk";
 export * as teamworkSDK from "@byzk/teamwork-sdk";
 /**
  * electron相关api
@@ -349,5 +349,10 @@ export declare const remoteCache: {
      * 用户列表
      */
     userList(filterOptions?: RemoteCacheUserListFilterOption): Promise<UserInfo[]>;
+    /**
+     * 获取机构列表
+     * @returns 机构列表
+     */
+    orgList(): Promise<OrgInfo[]>;
 };
 export declare const insideDb: DbInterface;
