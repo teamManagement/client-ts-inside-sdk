@@ -1,7 +1,7 @@
 {
-  "name": "@byzk/teamwork-inside-sdk",
-  "version": "0.1.0",
-  "description": "博雅中科 teamwork 平台客户端内部应用sdk",
+  "name": "@teamworktoolbox/inside-sdk",
+  "version": "0.1.4",
+  "description": "teamwork toolbox客户端内部sdk",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -18,7 +18,11 @@
   "license": "ISC",
   "devDependencies": {
     "@electron-toolkit/preload": "^1.0.2",
+    "@types/electron": "^1.6.10",
     "typedoc": "^0.23.20",
     "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@teamworktoolbox/sdk": "^0.1.4"
   }
 }
