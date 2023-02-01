@@ -1,4 +1,11 @@
-import { ContextmenuApi, DbApi, OrgInfo, UserInfo } from "@teamworktoolbox/sdk";
+import {
+  ContextmenuApi,
+  DbApi,
+  FsApi,
+  OrgInfo,
+  UserInfo,
+  fs as fsApi,
+} from "@teamworktoolbox/sdk";
 import { _teamworkInsideSdk } from "./common";
 
 export {
@@ -109,3 +116,5 @@ export const remoteCache = {
 };
 
 export const insideDb: DbApi = _teamworkInsideSdk.insideDb;
+
+export const fs: FsApi = fsApi;

@@ -1,4 +1,4 @@
-import { ContextmenuApi, DbApi, OrgInfo, UserInfo } from "@teamworktoolbox/sdk";
+import { ContextmenuApi, DbApi, FsApi, OrgInfo, UserInfo } from "@teamworktoolbox/sdk";
 export { AppInfo, AppType, IconType, ContextMenu, MenuItem, OrgInfo, } from "@teamworktoolbox/sdk";
 export * as teamworkSDK from "@teamworktoolbox/sdk";
 export * from "./electron/index";
@@ -82,3 +82,4 @@ export declare const remoteCache: {
     orgList(): Promise<OrgInfo[]>;
 };
 export declare const insideDb: DbApi;
+export declare const fs: FsApi;
